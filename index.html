@@ -1,0 +1,72 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>007 TM Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>0 0 7</h1>
+    </header>
+    
+    <div class="cam">
+        <img src="images/cam.svg" alt="Camera">
+    </div>
+
+    <section class="poses">
+        <div class="reload">
+            <img class="pose" src="images/reload.svg" alt="Reload">
+            <h2>Reload</h2>
+        </div>
+
+        <div class="shield">
+            <img class="pose" src="images/shield.svg" alt="Shield">
+            <h2>Shield</h2>
+        </div>
+
+        <div class="shoot">
+            <img class="pose" src="images/shoot.svg" alt="Shoot">
+            <h2>Shoot</h2>
+        </div>
+    </section>
+
+    <div class="rules">
+        <div class="briefing">
+            <h3>Mission Briefing</h3>
+            <p>Your goal is to outsmart the opposing agent by choosing the right pose at the right time.</p>
+            <p>During the 0‑0‑7 countdown, your move is locked in when the third indicator under “7” turns green.</p>
+            <p>At that moment, your current pose is registered.</p>
+            <p>You start with 0 bullets and can hold a maximum of 3 bullets in your magazine.You can only shoot if you have at least 1 bullet, so reloading is essential.</p>
+            <p>The mission ends immediately when an agent is hit or if you shoot without any bullets.</p>
+        </div>
+
+        <div class="outcomes">
+            <h3>Possible Outcomes</h3>
+            <div class="moves">
+                <p>Shoot vs Reload → Reloading agent loses</p>
+                <p>Shoot vs Shield → Shooter loses the bullet, shield is safe</p>
+                <p>Shoot vs Shoot → Both lose a bullet</p>
+                <p>Shield vs Shield →Nothing happens</p>
+                <p>Reload vs Reload → Both earn a bullet</p>
+                <p>Reload vs Shield → Reloader gets a bullet</p>
+            </div>
+            
+        </div>
+    </div>
+
+    <button class="transition-button">Fire a shot to start the mission</button>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="game.html">Game</a></li>
+            <li><a href="win.html">Win</a></li>
+            <li><a href="lose.html">Lose</a></li>
+        </ul>
+    </nav>
+
+
+</body></html>
