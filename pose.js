@@ -1,46 +1,79 @@
 const MODEL_URL = "./my-pose-model/";
-
+ 
 let model, webcam, ctx, maxPredictions;
-
+let predicting = false;
+let transitionFired = false;
+let consecutiveFrames = 0;
+let lastPose = "";
+ 
 async function initPose() {
     model = await tmPose.load(MODEL_URL + "model.json", MODEL_URL + "metadata.json");
     maxPredictions = model.getTotalClasses();
-
+ 
     webcam = new tmPose.Webcam(300, 225, true);
     await webcam.setup();
     await webcam.play();
-
+ 
     const canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
     canvas.width = 300;
     canvas.height = 225;
-
-    window.requestAnimationFrame(loop);
+ 
+    loop();
 }
-
+ 
 async function loop() {
     webcam.update();
-    await predict();
+    ctx.drawImage(webcam.canvas, 0, 0);
+    drawLabel();
+ 
+    if (!predicting && !transitionFired) {
+        predicting = true;
+        try {
+            await predict();
+        } finally {
+            predicting = false;
+        }
+    }
+ 
     window.requestAnimationFrame(loop);
 }
-
+ 
 async function predict() {
-    const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
+    const { posenetOutput } = await model.estimatePose(webcam.canvas);
     const prediction = await model.predict(posenetOutput);
-
+ 
     let highestScore = 0;
     let detectedPose = "";
-
+ 
     for (let i = 0; i < maxPredictions; i++) {
         if (prediction[i].probability > highestScore) {
             highestScore = prediction[i].probability;
             detectedPose = prediction[i].className;
         }
     }
-
-    if (highestScore > 0.8) {
+ 
+    if (highestScore > 0.95 && detectedPose === lastPose) {
+        consecutiveFrames++;
+    } else {
+        consecutiveFrames = 0;
+        lastPose = detectedPose;
+    }
+ 
+    if (consecutiveFrames >= 20) {
+        transitionFired = true;
         handlePose(detectedPose);
     }
-
-    ctx.drawImage(webcam.canvas, 0, 0);
 }
+ 
+function drawLabel() {
+    if (!lastPose) return;
+ 
+    ctx.fillStyle = "rgba(0,0,0,0.55)";
+    ctx.fillRect(0, 0, 300, 28);
+ 
+    ctx.fillStyle = "#FFCA45";
+    ctx.font = "bold 13px Oswald, sans-serif";
+    ctx.fillText(lastPose.toUpperCase(), 10, 18);
+}
+ 
