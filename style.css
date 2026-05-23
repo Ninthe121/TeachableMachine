@@ -9,12 +9,21 @@
   font-family: "Playfair Display", serif;
 }
 
+nav{
+  color: #FFCA45;
+  position: fixed;
+  top: 50px;
+  left: 30px;
+}
+
+
 body {
   background-image: url('images/backgroundborderlong.svg');
   background-size: 100% 90%;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 html,
@@ -92,7 +101,7 @@ header h1 {
   font-family: "Oswald", sans-serif;
   color: #fff;
   letter-spacing: 0.08em;
-  font-size: 1rem;
+  font-size: 1.25rem;
   margin: 8px 0 0;
 }
 
@@ -106,7 +115,7 @@ header h1 {
 .rules {
   display: flex;
   justify-content: flex-start;
-  gap: 35rem;
+  gap: 520px;
   max-width: 1200px;
   margin: 1rem auto 0;
   padding: 0 2rem;
@@ -115,6 +124,7 @@ header h1 {
 .briefing p, .moves p {
   white-space: nowrap;
   margin-bottom: 0.6rem;
+  font-size: 0.9rem;
 }
 
 .briefing {
@@ -127,7 +137,7 @@ header h1 {
 
 .briefing h3,
 .outcomes h3 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   letter-spacing: 0.1em;
   margin-bottom: 1.2rem;
 }
@@ -147,7 +157,7 @@ header h1 {
 #canvas {
   position: fixed;
   top: 20px;
-  right: 20px;
+  right: 33px;
   z-index: 100;
   border: 2px solid #FFCA45;
   border-radius: 4px;
