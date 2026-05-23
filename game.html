@@ -48,7 +48,9 @@
             initPose();
             startTimer();
             startCountdown(() => {
-                console.log("Move locked in! Current pose:", lastPose);
+                const playerMove = lastPose;
+                const enemyMove = getEnemyMove();
+                console.log("Player:" + playerMove, "Enemy:" + enemyMove);
             });
         };
     </script>

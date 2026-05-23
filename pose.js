@@ -111,3 +111,8 @@ function startTimer() {
 function stopTimer() {
     clearInterval(gameState.timerInterval);
 }
+
+function getEnemyMove() {
+    const moves = ["Reload", "Shield", "Shoot"];
+    return moves[Math.floor(Math.random() * 3)];
+}
