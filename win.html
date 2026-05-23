@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <button class="transition-button">Hold shield position to start the mission</button>
+    <button class="transition-button">Hold shoot position to start the mission</button>
 
     <nav>
         <ul>
@@ -42,8 +42,8 @@
     <script src="pose.js"></script>
     <script>
         function handlePose(pose) {
-            if (pose === "Shield") {
-                window.location.href = "game.html";
+            if (pose === "Shoot") {
+                window.location.href = "index.html";
             }
         }
         window.onload = () => initPose();
