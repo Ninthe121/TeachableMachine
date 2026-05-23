@@ -14,22 +14,13 @@
         <h1>0 0 7</h1>
     </header>
 
-    <section class="pose-game">
-        <div class="reload-game">
-            <img src="images/reload.svg" alt="Reload Position">
-            <h2>Reload</h2>
-        </div>
+    <div class="countdown-indicators">
+        <span class="indicator" id="ind-0"></span>
+         <span class="indicator" id="ind-1"></span>
+         <span class="indicator" id="ind-2"></span>
+    </div>
 
-        <div class="shield-game">
-            <img src="images/shield.svg" alt="Shield Position">
-            <h2>Shield</h2>
-        </div>
-
-        <div class="shoot-game">
-            <img src="images/shoot.svg" alt="Shoot Position">
-            <h2>Shoot</h2>
-        </div>
-    </section>
+    <section class="pose-game"></section>
 
     <nav>
         <ul>
@@ -53,7 +44,12 @@
                 shoot(); 
             }
         }
-        window.onload = () => initPose();
+        window.onload = () => {
+            initPose();
+            startCountdown(() => {
+                console.log("Move locked in! Current pose:", lastPose);
+            });
+        };
     </script>
 </body>
 </html>

@@ -76,4 +76,19 @@ function drawLabel() {
     ctx.font = "bold 13px Oswald, sans-serif";
     ctx.fillText(lastPose.toUpperCase(), 10, 18);
 }
- 
+
+function startCountdown(onLocked) {
+  document.querySelectorAll('.indicator').forEach(el => el.classList.remove('active'));
+
+  const timings = [2000, 4000, 6000]; // when each circle turns green
+
+  timings.forEach((delay, i) => {
+    setTimeout(() => {
+      document.getElementById(`ind-${i}`).classList.add('active');
+    }, delay);
+  });
+
+  setTimeout(() => {
+    onLocked(); 
+  }, 8000);
+}

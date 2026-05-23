@@ -10,10 +10,10 @@
 }
 
 nav{
-  color: #FFCA45;
+  color: #d50000;
   position: fixed;
   top: 50px;
-  left: 30px;
+  right: 80px;
 }
 
 
@@ -71,7 +71,7 @@ header h1 {
 
 .transition-button {
   display: block;
-  margin: 1.5rem auto 0;
+  margin: 0rem auto 0;
   font-family: "Oswald", sans-serif;
   background-color: #FFCA45;
   color: #000;
@@ -157,14 +157,34 @@ header h1 {
 #canvas {
   position: fixed;
   top: 20px;
-  right: 33px;
+  left: 41px;
   z-index: 100;
   border: 2px solid #FFCA45;
   border-radius: 4px;
   display: block;
 }
 
+.countdown-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
 
+.indicator {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #d50000;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.indicator.active {
+  background-color: #00e676;
+  box-shadow: 0 0 8px #00e676;
+}
 
 /*Lost screen */
 .lostScreen {
