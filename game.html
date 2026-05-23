@@ -6,18 +6,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
-    <script src="pose.js"></script>
 </head>
 <body>
+    <canvas id="canvas"></canvas>
+
     <header>
         <h1>0 0 7</h1>
     </header>
-    
-    <div class="cam">
-        <img src="#">
-    </div>
 
     <section class="pose-game">
         <div class="reload-game">
@@ -47,6 +42,20 @@
         </ul>
     </nav>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+    <script src="pose.js"></script>
+    <script>
+        function handlePose(pose) {
+            if (pose === "Reload") {
+             reloadWeapon(); 
+            } else if (pose === "Shield") {
+                activateShield(); 
+            } else if (pose === "Shoot") {
+                shoot(); 
+            }
+        }
+        window.onload = () => initPose();
+    </script>
 </body>
 </html>
