@@ -8,7 +8,7 @@ let lastPose = "";
  
 let gameState = {
     playerBullets: 0,
-    cpuBullets: 0,
+    enemyBullets: 0,
     round: 0,
     secondsElapsed: 0,
     timerInterval: null
@@ -115,4 +115,86 @@ function stopTimer() {
 function getEnemyMove() {
     const moves = ["Reload", "Shield", "Shoot"];
     return moves[Math.floor(Math.random() * 3)];
+}
+
+/* GAME RULES: */
+function checkRound(playerMove, enemyMove) {
+    gameState.round++;
+
+    if (playerMove === "Shoot" && enemyMove === "Reload") {
+        if (gameState.playerBullets > 0) {
+            gameState.playerBullets--;
+            return "player-wins";
+        } else {
+            return "player-no-bullets";
+        }
+    }
+
+    if (playerMove === "Shoot" && enemyMove === "Shield") {
+        if (gameState.playerBullets > 0) {
+            gameState.playerBullets--;
+            return "blocked";
+        } else {
+            return "player-no-bullets";
+        }
+    }
+
+    if (playerMove === "Shoot" && enemyMove === "Shoot") {
+        if (gameState.playerBullets > 0) gameState.playerBullets--;
+        if (gameState.enemyBullets > 0) gameState.enemyBullets--;
+        return "both-shoot";
+    }
+
+    if (playerMove === "Reload" && enemyMove === "Reload") {
+        if (gameState.playerBullets < 3) gameState.playerBullets++;
+        if (gameState.enemyBullets < 3) gameState.enemyBullets++;
+        return "both-reload";
+    }
+
+    if (playerMove === "Reload" && enemyMove === "Shield") {
+        if (gameState.playerBullets < 3) gameState.playerBullets++;
+        return "reload-safe";
+    }
+
+    if (playerMove === "Reload" && enemyMove === "Shoot") {
+        if (gameState.enemyBullets > 0) {
+            gameState.enemyBullets--;
+            return "enemy-wins";
+        } else {
+            return "enemy-no-bullets";
+        }
+    }
+
+    if (playerMove === "Shield" && enemyMove === "Shield") {
+        return "both-shield";
+    }
+
+    if (playerMove === "Shield" && enemyMove === "Reload") {
+        if (gameState.enemyBullets < 3) gameState.enemyBullets++;
+        return "reload-safe";
+    }
+
+    if (playerMove === "Shield" && enemyMove === "Shoot") {
+        if (gameState.enemyBullets > 0) gameState.enemyBullets--;
+        return "blocked";
+    }
+}
+
+
+function reloadWeapon() {}
+function activateShield() {}
+function shoot() {}
+
+/* Fix freeze screen after first round */
+function startRound() {
+    startCountdown(() => {
+        const playerMove = lastPose;
+        const enemyMove = getEnemyMove();
+        const result = checkRound(playerMove, enemyMove);
+        console.log("Player:", playerMove, "Enemy:", enemyMove);
+        console.log("Result:", result);
+        console.log("Player bullets:", gameState.playerBullets, "Enemy bullets:", gameState.enemyBullets);
+
+        startRound(); 
+    });
 }

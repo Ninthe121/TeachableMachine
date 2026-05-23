@@ -44,15 +44,14 @@
                 shoot(); 
             }
         }
+        
         window.onload = () => {
             initPose();
             startTimer();
-            startCountdown(() => {
-                const playerMove = lastPose;
-                const enemyMove = getEnemyMove();
-                console.log("Player:" + playerMove, "Enemy:" + enemyMove);
-            });
+            startRound();
         };
     </script>
 </body>
 </html>
+
+
