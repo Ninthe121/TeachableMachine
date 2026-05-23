@@ -6,7 +6,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+    <script src="pose.js"></script>
 </head>
 <body>
     <header>
@@ -17,18 +19,18 @@
         <img src="#">
     </div>
 
-    <section class="pose">
-        <div class="reload">
+    <section class="pose-game">
+        <div class="reload-game">
             <img src="images/reload.svg" alt="Reload Position">
             <h2>Reload</h2>
         </div>
 
-        <div class="shield">
+        <div class="shield-game">
             <img src="images/shield.svg" alt="Shield Position">
             <h2>Shield</h2>
         </div>
 
-        <div class="shoot">
+        <div class="shoot-game">
             <img src="images/shoot.svg" alt="Shoot Position">
             <h2>Shoot</h2>
         </div>
