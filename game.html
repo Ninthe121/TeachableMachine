@@ -46,6 +46,7 @@
         }
         window.onload = () => {
             initPose();
+            startTimer();
             startCountdown(() => {
                 console.log("Move locked in! Current pose:", lastPose);
             });

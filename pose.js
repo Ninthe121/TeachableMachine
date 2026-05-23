@@ -6,6 +6,14 @@ let transitionFired = false;
 let consecutiveFrames = 0;
 let lastPose = "";
  
+let gameState = {
+    playerBullets: 0,
+    cpuBullets: 0,
+    round: 0,
+    secondsElapsed: 0,
+    timerInterval: null
+};
+
 async function initPose() {
     model = await tmPose.load(MODEL_URL + "model.json", MODEL_URL + "metadata.json");
     maxPredictions = model.getTotalClasses();
@@ -91,4 +99,15 @@ function startCountdown(onLocked) {
   setTimeout(() => {
     onLocked(); 
   }, 8000);
+}
+
+function startTimer() {
+    gameState.timerInterval = setInterval(() => {
+        gameState.secondsElapsed++;
+        console.log("Time:", gameState.secondsElapsed);
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(gameState.timerInterval);
 }
