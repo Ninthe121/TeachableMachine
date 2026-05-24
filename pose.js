@@ -195,6 +195,41 @@ function startRound() {
         console.log("Result:", result);
         console.log("Player bullets:", gameState.playerBullets, "Enemy bullets:", gameState.enemyBullets);
 
-        startRound(); 
+        checkGameOver(result);
+
+        if (result !== "player-wins" && result !== "enemy-wins" && 
+            result !== "player-no-bullets" && result !== "enemy-no-bullets") {
+            startRound(); 
+        }
     });
+}
+
+function checkGameOver(result) {
+    if (result === "player-wins") {
+        stopTimer();
+        localStorage.setItem("time", gameState.secondsElapsed);
+        localStorage.setItem("rounds", gameState.round);
+        window.location.href = "win.html";
+    }
+
+    if (result === "enemy-wins") {
+        stopTimer();
+        localStorage.setItem("time", gameState.secondsElapsed);
+        localStorage.setItem("rounds", gameState.round);
+        window.location.href = "lose.html";
+    }
+
+    if (result === "player-no-bullets") {
+        stopTimer();
+        localStorage.setItem("time", gameState.secondsElapsed);
+        localStorage.setItem("rounds", gameState.round);
+        window.location.href = "lose.html";
+    }
+
+    if (result === "enemy-no-bullets") {
+        stopTimer();
+        localStorage.setItem("time", gameState.secondsElapsed);
+        localStorage.setItem("rounds", gameState.round);
+        window.location.href = "win.html";
+    }
 }
