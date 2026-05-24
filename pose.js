@@ -12,6 +12,12 @@ let gameState = {
     timerInterval: null
 };
 
+const svgMap = {
+    "Reload": "images/reloading.svg",
+    "Shield": "images/shielded.svg",
+    "Shoot": "images/shooter.svg"
+};
+
 async function initPose() {
     model = await tmPose.load(MODEL_URL + "model.json", MODEL_URL + "metadata.json");
     maxPredictions = model.getTotalClasses();
@@ -58,11 +64,18 @@ async function predict() {
             detectedPose = prediction[i].className;
         }
     }
- 
+
+    console.log("Detected:", detectedPose, "Score:", highestScore);
+
     if (highestScore > 0.85) {
         lastPose = detectedPose;
+        const playerSvg = document.getElementById("player-svg");
+        if (playerSvg) {
+            playerSvg.src = svgMap[lastPose];
+        }
     }
 }
+
  
 function drawLabel() {
     if (!lastPose) return;
