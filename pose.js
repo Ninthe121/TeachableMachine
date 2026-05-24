@@ -239,14 +239,14 @@ function checkGameOver(result) {
         stopTimer();
         localStorage.setItem("time", gameState.secondsElapsed);
         localStorage.setItem("rounds", gameState.round);
-        setTimeout(() => window.location.href = "win.html", 3000);
+        setTimeout(() => window.location.href = "lose.html", 3000);
     }
 
     if (result === "player-no-bullets") {
         stopTimer();
         localStorage.setItem("time", gameState.secondsElapsed);
         localStorage.setItem("rounds", gameState.round);
-        setTimeout(() => window.location.href = "win.html", 3000);
+        setTimeout(() => window.location.href = "lose.html", 3000);
     }
 
     if (result === "enemy-no-bullets") {
