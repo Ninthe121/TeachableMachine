@@ -16,6 +16,28 @@ nav{
   right: 80px;
 }
 
+*/Hidden nav*/
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li::before {
+    content: '●';
+    color: #d50000;
+    font-size: 1.2rem;
+    margin-right: 6px;
+}
+
+nav a {
+    color: #000;
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: #fff;
+}
 
 body {
   background-image: url('images/backgroundborderlong.svg');
