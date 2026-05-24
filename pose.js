@@ -2,8 +2,6 @@ const MODEL_URL = "./my-pose-model/";
  
 let model, webcam, ctx, maxPredictions;
 let predicting = false;
-let transitionFired = false;
-let consecutiveFrames = 0;
 let lastPose = "";
  
 let gameState = {
@@ -35,7 +33,7 @@ async function loop() {
     ctx.drawImage(webcam.canvas, 0, 0);
     drawLabel();
  
-    if (!predicting && !transitionFired) {
+    if (!predicting) {
         predicting = true;
         try {
             await predict();
@@ -61,16 +59,8 @@ async function predict() {
         }
     }
  
-    if (highestScore > 0.95 && detectedPose === lastPose) {
-        consecutiveFrames++;
-    } else {
-        consecutiveFrames = 0;
+    if (highestScore > 0.85) {
         lastPose = detectedPose;
-    }
- 
-    if (consecutiveFrames >= 20) {
-        transitionFired = true;
-        handlePose(detectedPose);
     }
 }
  
@@ -88,7 +78,7 @@ function drawLabel() {
 function startCountdown(onLocked) {
   document.querySelectorAll('.indicator').forEach(el => el.classList.remove('active'));
 
-  const timings = [2000, 4000, 6000]; // when each circle turns green
+  const timings = [2000, 4000, 6000];
 
   timings.forEach((delay, i) => {
     setTimeout(() => {

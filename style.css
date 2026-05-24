@@ -186,6 +186,33 @@ header h1 {
   box-shadow: 0 0 8px #00e676;
 }
 
+.pose-game {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 80px;
+    margin-top: 2rem;
+}
+
+.player-side, .enemy-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.player-side img, .enemy-side img {
+    height: 300px;
+    width: auto;
+}
+
+.player-side h2, .enemy-side h2 {
+    font-family: "Oswald", sans-serif;
+    color: #fff;
+    letter-spacing: 0.08em;
+    font-size: 1.25rem;
+}
+
 /*Lost screen */
 .lostScreen {
   position: relative;
