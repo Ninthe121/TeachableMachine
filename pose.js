@@ -74,6 +74,10 @@ async function predict() {
             playerSvg.src = svgMap[lastPose];
         }
     }
+
+    if (typeof handleNavPose === "function") {
+        handleNavPose(detectedPose, highestScore);
+    }
 }
 
  
