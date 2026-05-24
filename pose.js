@@ -18,6 +18,12 @@ const svgMap = {
     "Shoot": "images/shooter.svg"
 };
 
+const enemySvgMap = {
+    "Reload": "images/gotreloaded.svg",
+    "Shield": "images/gotshield.svg",
+    "Shoot": "images/gotshot.svg"
+};
+
 async function initPose() {
     model = await tmPose.load(MODEL_URL + "model.json", MODEL_URL + "metadata.json");
     maxPredictions = model.getTotalClasses();
@@ -112,6 +118,8 @@ function startTimer() {
     gameState.timerInterval = setInterval(() => {
         gameState.secondsElapsed++;
         console.log("Time:", gameState.secondsElapsed);
+        const timerDisplay = document.getElementById("timer-display");
+        if (timerDisplay) timerDisplay.textContent = gameState.secondsElapsed;
     }, 1000);
 }
 
@@ -120,13 +128,15 @@ function stopTimer() {
 }
 
 function getEnemyMove() {
-    const moves = ["Reload", "Shield", "Shoot"];
-    return moves[Math.floor(Math.random() * 3)];
+    const moves = gameState.round === 0 ? ["Reload", "Shield"] : ["Reload", "Shield", "Shoot"];
+    return moves[Math.floor(Math.random() * moves.length)];
 }
 
 /* GAME RULES: */
 function checkRound(playerMove, enemyMove) {
     gameState.round++;
+    const roundsDisplay = document.getElementById("rounds-display");
+    if (roundsDisplay) roundsDisplay.textContent = gameState.round;
 
     if (playerMove === "Shoot" && enemyMove === "Reload") {
         if (gameState.playerBullets > 0) {
@@ -194,10 +204,14 @@ function shoot() {}
 
 /* Fix freeze screen after first round */
 function startRound() {
+    document.getElementById("enemy-svg").src = "images/wait.svg";
     startCountdown(() => {
         const playerMove = lastPose;
         const enemyMove = getEnemyMove();
+        
+        document.getElementById("enemy-svg").src = enemySvgMap[enemyMove];
         const result = checkRound(playerMove, enemyMove);
+        updateBullets();
         console.log("Player:", playerMove, "Enemy:", enemyMove);
         console.log("Result:", result);
         console.log("Player bullets:", gameState.playerBullets, "Enemy bullets:", gameState.enemyBullets);
@@ -206,7 +220,9 @@ function startRound() {
 
         if (result !== "player-wins" && result !== "enemy-wins" && 
             result !== "player-no-bullets" && result !== "enemy-no-bullets") {
-            startRound(); 
+            setTimeout(() => {
+                startRound();
+            }, 4000);
         }
     });
 }
@@ -216,27 +232,36 @@ function checkGameOver(result) {
         stopTimer();
         localStorage.setItem("time", gameState.secondsElapsed);
         localStorage.setItem("rounds", gameState.round);
-        window.location.href = "win.html";
+        setTimeout(() => window.location.href = "win.html", 3000);
     }
 
     if (result === "enemy-wins") {
         stopTimer();
         localStorage.setItem("time", gameState.secondsElapsed);
         localStorage.setItem("rounds", gameState.round);
-        window.location.href = "lose.html";
+        setTimeout(() => window.location.href = "win.html", 3000);
     }
 
     if (result === "player-no-bullets") {
         stopTimer();
         localStorage.setItem("time", gameState.secondsElapsed);
         localStorage.setItem("rounds", gameState.round);
-        window.location.href = "lose.html";
+        setTimeout(() => window.location.href = "win.html", 3000);
     }
 
     if (result === "enemy-no-bullets") {
         stopTimer();
         localStorage.setItem("time", gameState.secondsElapsed);
         localStorage.setItem("rounds", gameState.round);
-        window.location.href = "win.html";
+        setTimeout(() => window.location.href = "win.html", 3000);
+    }
+}
+
+function updateBullets() {
+    for (let i = 0; i < 3; i++) {
+        const playerBullet = document.getElementById(`player-bullet-${i}`);
+        const enemyBullet = document.getElementById(`enemy-bullet-${i}`);
+        if (playerBullet) playerBullet.classList.toggle("inactive", i >= gameState.playerBullets);
+        if (enemyBullet) enemyBullet.classList.toggle("inactive", i >= gameState.enemyBullets);
     }
 }

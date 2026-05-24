@@ -81,7 +81,6 @@ header h1 {
   border: none;
 }
 
-
 /* Poses */
 
 .poses {
@@ -156,12 +155,14 @@ header h1 {
 /* Webcam */
 #canvas {
   position: fixed;
-  top: 20px;
+  top: 40px;
   left: 41px;
   z-index: 100;
   border: 2px solid #FFCA45;
   border-radius: 4px;
   display: block;
+  width: 220px;
+  height: 150px;
 }
 
 .countdown-indicators {
@@ -201,8 +202,8 @@ header h1 {
     gap: 1rem;
 }
 
-.player-side img, .enemy-side img {
-    height: 300px;
+#player-svg, #enemy-svg {
+    height: 350px;
     width: auto;
 }
 
@@ -211,6 +212,48 @@ header h1 {
     color: #fff;
     letter-spacing: 0.08em;
     font-size: 1.25rem;
+    order: 2;
+}
+
+.game-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.game-info p {
+    font-family: "Oswald", sans-serif;
+    color: #FFCA45;
+    font-size: 2rem;
+    text-align: center;
+    margin: 0;
+}
+
+.bullets {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    padding: 6px 10px;
+    border: 2px solid #FFCA45;
+    border-radius: 12px;
+    width: fit-content;
+    min-width: 0;
+}
+
+.bullet {
+    height: 100px !important;
+    width: 75px !important;
+}
+
+.bullet {
+    height: 15px;
+    width: 15px;
+}
+
+.bullet.inactive {
+    opacity: 0.2;
 }
 
 /*Lost screen */
@@ -315,3 +358,23 @@ header h1 {
 }
 
     
+.winScreen .missionStatus,
+.lostScreen .missionStatus {
+    font-family: "Playfair Display", serif;
+    color: #FFCA45;
+    font-size: 2rem;
+}
+
+.winScreen .missionSubtitle,
+.lostScreen .missionSubtitle {
+    font-family: "Oswald", sans-serif;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.winScreen .missionInfo p,
+.lostScreen .missionInfo p {
+    font-family: "Oswald", sans-serif;
+    color: #FFCA45;
+    font-size: 1.1rem;
+}

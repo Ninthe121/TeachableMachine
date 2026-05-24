@@ -22,13 +22,31 @@
 
     <section class="pose-game">
         <div class="player-side">
-            <h2>YOU</h2>
             <img id="player-svg" src="images/reloading.svg" alt="Player Pose">
+            <h2>YOU</h2>
+            <div class="bullets" id="player-bullets">
+                <img src="images/bullet.png" class="bullet" id="player-bullet-0">
+                <img src="images/bullet.png" class="bullet inactive" id="player-bullet-1">
+                <img src="images/bullet.png" class="bullet inactive" id="player-bullet-2">
+            </div>
+            
+
         </div>
 
+        <div class="game-info">
+            <p>TIME: <span id="timer-display">0</span>s</p>
+            <p>ROUNDS: <span id="rounds-display">0</span></p>
+        </div>  
+
         <div class="enemy-side">
-            <h2>ENEMY</h2>
             <img id="enemy-svg" src="images/reloading.svg" alt="Enemy Pose">
+            <h2>ENEMY</h2>
+            <div class="bullets" id="enemy-bullets">
+                <img src="images/bullet.png" class="bullet inactive" id="enemy-bullet-0">
+                <img src="images/bullet.png" class="bullet inactive" id="enemy-bullet-1">
+                <img src="images/bullet.png" class="bullet inactive" id="enemy-bullet-2">
+            </div>
+            
         </div>
     </section>
 

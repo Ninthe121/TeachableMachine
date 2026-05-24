@@ -22,8 +22,8 @@
             <h2 class="missionStatus">Mission Failed</h2>
             <p class="missionSubtitle">Agent Down</p>
             <div class="missionInfo">
-                <p class="missionRound"><strong>Round:</strong> 7</p>
-                 <p class="missionTime"><strong>Time:</strong> 1min 30s</p>
+                <p class="missionRound"><strong>Round:</strong> <span id="result-rounds"></span></p>
+                <p class="missionTime"><strong>Time:</strong> <span id="result-time"></span>s</p>
             </div>
         </div>
 
@@ -50,5 +50,9 @@
             window.onload = () => initPose();
         </script>
         <script src="navigate.js"></script>
+        <script>
+            document.getElementById("result-rounds").textContent = localStorage.getItem("rounds");
+            document.getElementById("result-time").textContent = localStorage.getItem("time");
+        </script>
     </body>
 </html>
